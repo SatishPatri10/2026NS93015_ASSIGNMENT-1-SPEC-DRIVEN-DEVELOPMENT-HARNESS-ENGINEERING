@@ -1,6 +1,7 @@
 # Technical Plan: Semantic Code Review & Refactoring Assistant
 
 ## 1. System Architecture
+
 ```
 [ Input: Code Snippet / Diff / Prompt ]
                  │
@@ -26,6 +27,7 @@
 ```
 
 ## 2. Directory Structure
+
 ```
 Part-1B/
 ├── .specify/                         # Spec Kit configuration and constitution
@@ -57,6 +59,7 @@ Part-1B/
 ```
 
 ## 3. Technology Stack
+
 - **Language**: Node.js (CommonJS, >= 18.x)
 - **External AI Integrations**: Supported via standard HTTPS `fetch` calls to Google Gemini API (`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`) or OpenAI API (`https://api.openai.com/v1/chat/completions`) when keys are supplied in `process.env`.
 - **Zero-Dependency Architecture**: Uses Node.js standard libraries (`node:fs`, `node:path`, `node:test`, `node:assert`, `node:https`) ensuring offline reliability.

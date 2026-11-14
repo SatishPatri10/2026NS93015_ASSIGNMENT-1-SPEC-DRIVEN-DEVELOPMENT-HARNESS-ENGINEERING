@@ -88,20 +88,21 @@ Both applications use **zero external runtime dependencies** for test and harnes
 
 ### Execution Commands & Preserved Log Files
 
-| Command Description | Terminal Command | Result | Saved Log File |
-|---|---|---|---|
-| **Part 1A Unit & Contract Tests** | `node --test tests/tokenBucket.test.js tests/apiRateLimit.test.js` (in `Part-1A`) | **13/13 Pass (100%)** | [`logs/part1a_tests.log`](logs/part1a_tests.log) |
-| **Part 1A Deterministic Harness** (Gates 1, 2, 3) | `node .harness/run-harness.js` (in `Part-1A`) | **PASS (100%)** | [`logs/part1a_harness.log`](logs/part1a_harness.log) |
-| **Part 1A Initial Failure Harness** (Pre-repair) | `$env:SRC_DIR="evidence/initial-generation/src"; node .harness/run-harness.js` | **FAIL** (Gate 2 SAST + Gate 3 Contract) | [`logs/part1a_initial_failure_harness.log`](logs/part1a_initial_failure_harness.log) |
-| **Part 1B Component & Unit Tests** | `node --test tests/reviewer.test.js` (in `Part-1B`) | **7/7 Pass (100%)** | [`logs/part1b_tests.log`](logs/part1b_tests.log) |
-| **Part 1B 3-Layer Evaluation Harness** (16 Cases) | `node .harness/evalRunner.js` (in `Part-1B`) | **PASS (98.8% Aggregate)** | [`logs/part1b_eval_harness.log`](logs/part1b_eval_harness.log) |
-| **Part 1B Initial Failure Evaluation** (Pre-repair) | `$env:SRC_PATH="evidence/initial-generation/src/reviewer.js"; node .harness/evalRunner.js` | **FAIL (76.1% < 85%)** | [`logs/part1b_initial_failure_eval.log`](logs/part1b_initial_failure_eval.log) |
+| Command Description                                 | Terminal Command                                                                           | Result                                   | Saved Log File                                                                       |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------- | ------------------------------------------------------------------------------------ |
+| **Part 1A Unit & Contract Tests**                   | `node --test tests/tokenBucket.test.js tests/apiRateLimit.test.js` (in `Part-1A`)          | **13/13 Pass (100%)**                    | [`logs/part1a_tests.log`](logs/part1a_tests.log)                                     |
+| **Part 1A Deterministic Harness** (Gates 1, 2, 3)   | `node .harness/run-harness.js` (in `Part-1A`)                                              | **PASS (100%)**                          | [`logs/part1a_harness.log`](logs/part1a_harness.log)                                 |
+| **Part 1A Initial Failure Harness** (Pre-repair)    | `$env:SRC_DIR="evidence/initial-generation/src"; node .harness/run-harness.js`             | **FAIL** (Gate 2 SAST + Gate 3 Contract) | [`logs/part1a_initial_failure_harness.log`](logs/part1a_initial_failure_harness.log) |
+| **Part 1B Component & Unit Tests**                  | `node --test tests/reviewer.test.js` (in `Part-1B`)                                        | **7/7 Pass (100%)**                      | [`logs/part1b_tests.log`](logs/part1b_tests.log)                                     |
+| **Part 1B 3-Layer Evaluation Harness** (16 Cases)   | `node .harness/evalRunner.js` (in `Part-1B`)                                               | **PASS (98.8% Aggregate)**               | [`logs/part1b_eval_harness.log`](logs/part1b_eval_harness.log)                       |
+| **Part 1B Initial Failure Evaluation** (Pre-repair) | `$env:SRC_PATH="evidence/initial-generation/src/reviewer.js"; node .harness/evalRunner.js` | **FAIL (76.1% < 85%)**                   | [`logs/part1b_initial_failure_eval.log`](logs/part1b_initial_failure_eval.log)       |
 
 ---
 
 ### Step-by-Step Terminal Instructions
 
 #### Running Part 1A (Deterministic Harness)
+
 ```powershell
 cd Part-1A
 
@@ -113,6 +114,7 @@ node .harness/run-harness.js
 ```
 
 #### Running Part 1B (Non-Deterministic AI Evaluation Harness)
+
 ```powershell
 cd Part-1B
 
@@ -123,7 +125,7 @@ node --test tests/reviewer.test.js
 node .harness/evalRunner.js
 ```
 
-*(Optional: If you wish to test Part 1B against live cloud LLMs, set `$env:GEMINI_API_KEY="your-key"` or `$env:OPENAI_API_KEY="your-key"`; the harness will automatically route to the cloud API while maintaining the same 3-layer validation pipeline!)*
+_(Optional: If you wish to test Part 1B against live cloud LLMs, set `$env:GEMINI_API_KEY="your-key"` or `$env:OPENAI_API_KEY="your-key"`; the harness will automatically route to the cloud API while maintaining the same 3-layer validation pipeline!)_
 
 ---
 

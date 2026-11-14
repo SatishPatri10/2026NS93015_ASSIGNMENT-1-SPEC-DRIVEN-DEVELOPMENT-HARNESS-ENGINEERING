@@ -1,6 +1,7 @@
 # Part 1A Deterministic Harness & Self-Healing Audit Log
 
 ## 1. Initial Coding-Agent Generation & Specification Context
+
 - **Specification Source**: `specs/001-tiered-rate-limiter/spec.md`, `specs/001-tiered-rate-limiter/plan.md`, `specs/001-tiered-rate-limiter/tasks.md`.
 - **Implementation Goal**: Build a high-throughput, deterministic Tiered Rate Limiter microservice in Node.js implementing the Token Bucket algorithm with Free, Standard, and Premium tiers, RFC 6585 header compliance, and an in-memory client storage adapter.
 - **Initial Code Snapshot Location**: `evidence/initial-generation/src/`
@@ -8,12 +9,14 @@
 ---
 
 ## 2. Harness Execution Run 1 (Initial Generation)
+
 - **Execution Command**: `node .harness/run-harness.js` (targeting `evidence/initial-generation/src`)
 - **Execution Timestamp**: 2026-11-14T06:08:50.732Z
 - **Outcome**: **FAIL**
 - **Evidence Artifact**: `evidence/initial-run.json`
 
-### Gate-by-Gate Breakdown:
+### Gate-by-Gate Breakdown
+
 1. **Gate 1 (Syntax & Static Lint Guard)**: **PASS** (0 violations across 6 source files).
 2. **Gate 2 (SAST Security Guard)**: **FAIL** (1 critical finding):
    - `SEC004_UNBOUNDED_CACHE_MEMORY_LEAK`: `src/limiter/memoryStore.js` initialized an unbounded `Map` without an eviction mechanism (`.delete()` / `evictExpired()`), introducing a denial-of-service / memory-exhaustion vulnerability under persistent client churn.
@@ -24,6 +27,7 @@
 ---
 
 ## 3. Failure Evidence Fed Back to Coding Agent
+
 The following structured diagnostic evidence was extracted from the harness results and supplied to the coding agent for corrective repair:
 
 ```json
@@ -51,7 +55,9 @@ The following structured diagnostic evidence was extracted from the harness resu
 ---
 
 ## 4. Self-Healing & Repair Applied
+
 Without weakening the specification or lowering any test assertions, the coding agent applied targeted repairs:
+
 1. **In-Memory Store Eviction (`src/limiter/memoryStore.js`)**:
    - Added `lastAccessed` timestamp tracking to each client bucket entry.
    - Implemented `evictExpired(maxIdleMs, now)` method utilizing `this.buckets.delete(key)` to safely purge client buckets that remain idle longer than the configured TTL (default 1 hour).
@@ -63,12 +69,14 @@ Without weakening the specification or lowering any test assertions, the coding 
 ---
 
 ## 5. Harness Execution Run 2 (Repaired Implementation)
+
 - **Execution Command**: `node .harness/run-harness.js` (targeting `src/`)
 - **Execution Timestamp**: 2026-11-14T06:09:00.804Z
 - **Outcome**: **PASS (100%)**
 - **Evidence Artifact**: `evidence/final-run.json` & `evidence/harness-results.json`
 
-### Gate-by-Gate Verification:
+### Gate-by-Gate Verification
+
 1. **Gate 1 (Syntax & Static Lint Guard)**: **PASS** (0 violations across all files).
 2. **Gate 2 (SAST Security Guard)**: **PASS** (0 findings; TTL eviction detected).
 3. **Gate 3 (Unit & Contract Test Suite)**: **PASS** (13 of 13 tests passed, 0 failures, duration 526ms).
@@ -78,10 +86,11 @@ Without weakening the specification or lowering any test assertions, the coding 
 ---
 
 ## 6. Final Human Review & Acceptance Decision
+
 - **Decision**: **ACCEPT**
 - **Reviewer**: Software Engineering Team Lead / Student Evaluator
 - **Justification**:
   The application strictly satisfies all 8 formal Acceptance Criteria specified in `spec.md`. The harness confirmed code syntax hygiene, zero SAST vulnerabilities, and verified exact mathematical rate-limiting behavior across Free, Standard, and Premium tiers. The automated test suite passed deterministically without requiring external network connectivity or third-party runtime dependencies.
 - **Known Limitations & Production Considerations**:
-  - *Distributed Nodes*: The current `MemoryStore` maintains bucket state local to a single Node.js process. In a horizontally scaled cluster behind a round-robin load balancer, a Redis-backed distributed adapter (using Redis Lua scripts) would be recommended to synchronize token buckets across cluster nodes.
-  - *Clock Drift*: Extreme system clock adjustments on the host machine could briefly skew $\Delta t$ calculations. In high-stakes production environments, a monotonic clock source (`process.hrtime.bigint()`) should be preferred over wall-clock timestamps.
+  - _Distributed Nodes_: The current `MemoryStore` maintains bucket state local to a single Node.js process. In a horizontally scaled cluster behind a round-robin load balancer, a Redis-backed distributed adapter (using Redis Lua scripts) would be recommended to synchronize token buckets across cluster nodes.
+  - _Clock Drift_: Extreme system clock adjustments on the host machine could briefly skew $\Delta t$ calculations. In high-stakes production environments, a monotonic clock source (`process.hrtime.bigint()`) should be preferred over wall-clock timestamps.
