@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-11-14T06:08:51.228Z",
+  "overallDecision": "FAIL",
+  "durationMs": 503,
+  "targetSrcDir": "E:\\MTECH\\BITS MTECH\\Sem 1\\AI SDLC\\Assignment\\Assignment1\\Part-1A\\evidence\\initial-generation\\src",
+  "gates": {
+    "gate1_lint": {
+      "gate": "Gate 1: Syntax & Lint Guard",
+      "status": "PASS",
+      "totalFilesChecked": 6,
+      "violationCount": 0,
+      "details": {}
+    },
+    "gate2_security": {
+      "gate": "Gate 2: SAST Security Guard",
+      "status": "FAIL",
+      "totalFilesChecked": 6,
+      "findingsCount": 1,
+      "details": {
+        "limiter\\memoryStore.js": [
+          {
+            "rule": "SEC004_UNBOUNDED_CACHE_MEMORY_LEAK",
+            "severity": "HIGH",
+            "line": 1,
+            "message": "In-memory store maintains unbounded collections without an eviction strategy (.delete() / evictExpired)"
+          }
+        ]
+      }
+    },
+    "gate3_tests": {
+      "gate": "Gate 3: Deterministic Unit & Contract Tests",
+      "status": "FAIL",
+      "exitCode": 1,
+      "totalTestsReported": 17,
+      "passedTests": 13,
+      "failedTests": 4,
+      "rawOutput": "TAP version 13\n# Subtest: API Rate Limiter - Contract & Integration Tests\n    # Subtest: AC-1 & AC-2: Valid standard tier request returns 200 with proper headers\n    ok 1 - AC-1 & AC-2: Valid standard tier request returns 200 with proper headers\n      ---\n      duration_ms: 7.4549\n      ...\n    # Subtest: AC-3: Exhausting token bucket triggers HTTP 429 and Retry-After header\n    not ok 2 - AC-3: Exhausting token bucket triggers HTTP 429 and Retry-After header\n      ---\n      duration_ms: 2.8754\n      location: 'E:\\\\MTECH\\\\BITS MTECH\\\\Sem 1\\\\AI SDLC\\\\Assignment\\\\Assignment1\\\\Part-1A\\\\tests\\\\apiRateLimit.test.js:36:11'\n      failureType: 'testCodeFailure'\n      error: 'Retry-After header must be present on 429 response'\n      code: 'ERR_ASSERTION'\n      name: 'AssertionError'\n      expected: true\n      actual: false\n      operator: '=='\n      stack: |-\n        TestContext.<anonymous> (E:\\MTECH\\BITS MTECH\\Sem 1\\AI SDLC\\Assignment\\Assignment1\\Part-1A\\tests\\apiRateLimit.test.js:47:12)\n        async Test.run (node:internal/test_runner/test:688:9)\n        async TestContext.<anonymous> (E:\\MTECH\\BITS MTECH\\Sem 1\\AI SDLC\\Assignment\\Assignment1\\Part-1A\\tests\\apiRateLimit.test.js:36:3)\n        async Test.run (node:internal/test_runner/test:688:9)\n        async Test.processPendingSubtests (node:internal/test_runner/test:420:7)\n      ...\n    # Subtest: AC-6: Anonymous clients without x-api-key default to Free tier\n    ok 3 - AC-6: Anonymous clients without x-api-key default to Free tier\n      ---\n      duration_ms: 0.5484\n      ...\n    # Subtest: AC-7: Invalid API key returns 401 Unauthorized\n    ok 4 - AC-7: Invalid API key returns 401 Unauthorized\n      ---\n      duration_ms: 0.587\n      ...\n    # Subtest: AC-8: Unthrottled /health endpoint always returns 200 OK\n    ok 5 - AC-8: Unthrottled /health endpoint always returns 200 OK\n      ---\n      duration_ms: 1.5885\n      ...\n    1..5\nnot ok 1 - API Rate Limiter - Contract & Integration Tests\n  ---\n  duration_ms: 16.9159\n  location: 'E:\\\\MTECH\\\\BITS MTECH\\\\Sem 1\\\\AI SDLC\\\\Assignment\\\\Assignment1\\\\Part-1A\\\\tests\\\\apiRateLimit.test.js:10:1'\n  failureType: 'subtestsFailed'\n  error: '1 subtest failed'\n  code: 'ERR_TEST_FAILURE'\n  ...\n# Subtest: TokenBucket - Unit Tests\n    # Subtest: TC-U01: Initializes with full burst capacity\n    ok 1 - TC-U01: Initializes with full burst capacity\n      ---\n      duration_ms: 3.0036\n      ...\n    # Subtest: TC-U02: Rejects consumption when tokens are exhausted\n    ok 2 - TC-U02: Rejects consumption when tokens are exhausted\n      ---\n      duration_ms: 0.4086\n      ...\n    # Subtest: TC-U03: Accurately refills tokens over elapsed time\n    ok 3 - TC-U03: Accurately refills tokens over elapsed time\n      ---\n      duration_ms: 0.2355\n      ...\n    # Subtest: TC-U04: Clamps tokens to burst capacity after long idle time\n    ok 4 - TC-U04: Clamps tokens to burst capacity after long idle time\n      ---\n      duration_ms: 0.2524\n      ...\n    # Subtest: TC-U05: MemoryStore creates and evicts idle buckets\n    not ok 5 - TC-U05: MemoryStore creates and evicts idle buckets\n      ---\n      duration_ms: 3.3793\n      location: 'E:\\\\MTECH\\\\BITS MTECH\\\\Sem 1\\\\AI SDLC\\\\Assignment\\\\Assignment1\\\\Part-1A\\\\tests\\\\tokenBucket.test.js:53:11'\n      failureType: 'testCodeFailure'\n      error: 'MemoryStore lacks required evictExpired method'\n      code: 'ERR_ASSERTION'\n      name: 'AssertionError'\n      operator: 'fail'\n      stack: |-\n        TestContext.<anonymous> (E:\\MTECH\\BITS MTECH\\Sem 1\\AI SDLC\\Assignment\\Assignment1\\Part-1A\\tests\\tokenBucket.test.js:66:14)\n        Test.runInAsyncScope (node:async_hooks:206:9)\n        Test.run (node:internal/test_runner/test:687:25)\n        Test.start (node:internal/test_runner/test:596:17)\n        TestContext.test (node:internal/test_runner/test:192:20)\n        TestContext.<anonymous> (E:\\MTECH\\BITS MTECH\\Sem 1\\AI SDLC\\Assignment\\Assignment1\\Part-1A\\tests\\tokenBucket.test.js:53:11)\n        async Test.run (node:internal/test_runner/test:688:9)\n        async Test.processPendingSubtests (node:internal/test_runner/test:420:7)\n      ...\n    # Subtest: TC-U06: Validates constructor parameter guards\n    ok 6 - TC-U06: Validates constructor parameter guards\n      ---\n      duration_ms: 0.7226\n      ...\n    1..6\nnot ok 2 - TokenBucket - Unit Tests\n  ---\n  duration_ms: 10.9432\n  location: 'E:\\\\MTECH\\\\BITS MTECH\\\\Sem 1\\\\AI SDLC\\\\Assignment\\\\Assignment1\\\\Part-1A\\\\tests\\\\tokenBucket.test.js:10:1'\n  failureType: 'subtestsFailed'\n  error: '1 subtest failed'\n  code: 'ERR_TEST_FAILURE'\n  ...\n1..2\n# tests 13\n# suites 0\n# pass 9\n# fail 4\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 288.8634\n\n"
+    }
+  }
+}

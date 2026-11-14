@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-11-14T06:09:01.323Z",
+  "overallDecision": "PASS",
+  "durationMs": 526,
+  "targetSrcDir": "E:\\MTECH\\BITS MTECH\\Sem 1\\AI SDLC\\Assignment\\Assignment1\\Part-1A\\src",
+  "gates": {
+    "gate1_lint": {
+      "gate": "Gate 1: Syntax & Lint Guard",
+      "status": "PASS",
+      "totalFilesChecked": 6,
+      "violationCount": 0,
+      "details": {}
+    },
+    "gate2_security": {
+      "gate": "Gate 2: SAST Security Guard",
+      "status": "PASS",
+      "totalFilesChecked": 6,
+      "findingsCount": 0,
+      "details": {}
+    },
+    "gate3_tests": {
+      "gate": "Gate 3: Deterministic Unit & Contract Tests",
+      "status": "PASS",
+      "exitCode": 0,
+      "totalTestsReported": 13,
+      "passedTests": 13,
+      "failedTests": 0,
+      "rawOutput": "TAP version 13\n# Subtest: API Rate Limiter - Contract & Integration Tests\n    # Subtest: AC-1 & AC-2: Valid standard tier request returns 200 with proper headers\n    ok 1 - AC-1 & AC-2: Valid standard tier request returns 200 with proper headers\n      ---\n      duration_ms: 8.6931\n      ...\n    # Subtest: AC-3: Exhausting token bucket triggers HTTP 429 and Retry-After header\n    ok 2 - AC-3: Exhausting token bucket triggers HTTP 429 and Retry-After header\n      ---\n      duration_ms: 3.0457\n      ...\n    # Subtest: AC-6: Anonymous clients without x-api-key default to Free tier\n    ok 3 - AC-6: Anonymous clients without x-api-key default to Free tier\n      ---\n      duration_ms: 0.5004\n      ...\n    # Subtest: AC-7: Invalid API key returns 401 Unauthorized\n    ok 4 - AC-7: Invalid API key returns 401 Unauthorized\n      ---\n      duration_ms: 0.9599\n      ...\n    # Subtest: AC-8: Unthrottled /health endpoint always returns 200 OK\n    ok 5 - AC-8: Unthrottled /health endpoint always returns 200 OK\n      ---\n      duration_ms: 1.7872\n      ...\n    1..5\nok 1 - API Rate Limiter - Contract & Integration Tests\n  ---\n  duration_ms: 20.1827\n  ...\n# Subtest: TokenBucket - Unit Tests\n    # Subtest: TC-U01: Initializes with full burst capacity\n    ok 1 - TC-U01: Initializes with full burst capacity\n      ---\n      duration_ms: 3.2047\n      ...\n    # Subtest: TC-U02: Rejects consumption when tokens are exhausted\n    ok 2 - TC-U02: Rejects consumption when tokens are exhausted\n      ---\n      duration_ms: 0.695\n      ...\n    # Subtest: TC-U03: Accurately refills tokens over elapsed time\n    ok 3 - TC-U03: Accurately refills tokens over elapsed time\n      ---\n      duration_ms: 0.2897\n      ...\n    # Subtest: TC-U04: Clamps tokens to burst capacity after long idle time\n    ok 4 - TC-U04: Clamps tokens to burst capacity after long idle time\n      ---\n      duration_ms: 0.4069\n      ...\n    # Subtest: TC-U05: MemoryStore creates and evicts idle buckets\n    ok 5 - TC-U05: MemoryStore creates and evicts idle buckets\n      ---\n      duration_ms: 0.4737\n      ...\n    # Subtest: TC-U06: Validates constructor parameter guards\n    ok 6 - TC-U06: Validates constructor parameter guards\n      ---\n      duration_ms: 2.5256\n      ...\n    1..6\nok 2 - TokenBucket - Unit Tests\n  ---\n  duration_ms: 12.2466\n  ...\n1..2\n# tests 13\n# suites 0\n# pass 13\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 333.3345\n\n"
+    }
+  }
+}
