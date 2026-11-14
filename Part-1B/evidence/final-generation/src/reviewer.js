@@ -5,6 +5,34 @@ const { evaluateInputGuardrail } = require('./inputGuardrail');
 const { sanitizeAndParseJSON } = require('./jsonSanitizer');
 const { analyzeCodeLocally } = require('./localEngine');
 
+// Automatically load local .env if present (without external dependencies)
+function loadEnv() {
+  const envCandidates = [
+    path.resolve(process.cwd(), '.env'),
+    path.resolve(__dirname, '../.env'),
+    path.resolve(__dirname, '../../.env')
+  ];
+  for (const envPath of envCandidates) {
+    if (fs.existsSync(envPath)) {
+      try {
+        const raw = fs.readFileSync(envPath, 'utf8');
+        for (const line of raw.split('\n')) {
+          const trimmed = line.trim();
+          if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
+            const [k, ...v] = trimmed.split('=');
+            const key = k.trim();
+            const val = v.join('=').trim().replace(/^['"]|['"]$/g, '');
+            if (!process.env[key]) {
+              process.env[key] = val;
+            }
+          }
+        }
+      } catch (_) {}
+    }
+  }
+}
+loadEnv();
+
 class CodeReviewAssistant {
   constructor(options = {}) {
     this.geminiApiKey = options.geminiApiKey || process.env.GEMINI_API_KEY;
@@ -74,7 +102,8 @@ class CodeReviewAssistant {
 
   _callGemini(code, language) {
     return new Promise((resolve, reject) => {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${this.geminiApiKey}`;
+      const model = process.env.GEMINI_MODEL || 'gemini-flash-latest';
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${this.geminiApiKey}`;
       const payload = JSON.stringify({
         contents: [
           {
@@ -90,8 +119,10 @@ class CodeReviewAssistant {
 
       const req = https.request(url, {
         method: 'POST',
+        timeout: 5000,
         headers: {
           'Content-Type': 'application/json',
+          'x-goog-api-key': this.geminiApiKey,
           'Content-Length': Buffer.byteLength(payload)
         }
       }, (res) => {
@@ -112,6 +143,10 @@ class CodeReviewAssistant {
         });
       });
 
+      req.on('timeout', () => {
+        req.destroy();
+        reject(new Error('Gemini API call timed out (5000ms)'));
+      });
       req.on('error', reject);
       req.write(payload);
       req.end();

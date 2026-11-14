@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-11-14T06:23:23.578Z",
+  "timestamp": "2026-11-14T06:34:58.164Z",
   "finalDecision": "PASS",
-  "durationMs": 51,
+  "durationMs": 47149,
   "totalCases": 16,
   "metrics": {
     "layer1_schema_pass_rate": "100%",
