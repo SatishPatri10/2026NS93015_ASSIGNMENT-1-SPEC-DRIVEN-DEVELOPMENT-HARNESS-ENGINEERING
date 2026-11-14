@@ -1,0 +1,29 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Coverage / Debug Logs
+coverage/
+npm-debug.log*
+
+# Allow test & harness execution evidence logs
+!logs/
+!logs/*.log
+!Part-1A/logs/
+!Part-1A/logs/*.log
+!Part-1B/logs/
+!Part-1B/logs/*.log

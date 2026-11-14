@@ -1,20 +1,23 @@
 # BITS Pilani - AI-Augmented Software Development Life Cycle (SEZG534)
+
 ## Assignment 1: Spec-Driven Development & Harness Engineering
 
 ---
 
 ### Project Overview
+
 This repository contains the complete implementation and verification artifacts for **Assignment 1**, showcasing how **GitHub Spec Kit** and **Automated Verification Harnesses** constrain, validate, and repair AI-assisted software implementations across both deterministic and non-deterministic paradigms.
 
-| Module | Application | Engineering Focus | Final Harness Status |
-|---|---|---|---|
-| **Part 1A** | **Tiered Rate Limiter Microservice** | Deterministic token-bucket algorithm, RFC 6585 compliance, in-memory client storage, SAST/lint/contract guards | **PASS (100% - 13/13 tests)** |
-| **Part 1B** | **Semantic Code Review & Refactoring Assistant** | Non-deterministic AI behavior, 16-case benchmark evaluation dataset, 3-layer validation harness | **PASS (98.8% Aggregate Score)** |
-| **Part 2** | **Assessed Reflection Report** | Detailed, evidence-based answers to all 5 assessed reflection questions | **Documented in `Reflection_Report_PART_2.md`** |
+| Module      | Application                                      | Engineering Focus                                                                                              | Final Harness Status                            |
+| ----------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **Part 1A** | **Tiered Rate Limiter Microservice**             | Deterministic token-bucket algorithm, RFC 6585 compliance, in-memory client storage, SAST/lint/contract guards | **PASS (100% - 13/13 tests)**                   |
+| **Part 1B** | **Semantic Code Review & Refactoring Assistant** | Non-deterministic AI behavior, 16-case benchmark evaluation dataset, 3-layer validation harness                | **PASS (98.8% Aggregate Score)**                |
+| **Part 2**  | **Assessed Reflection Report**                   | Detailed, evidence-based answers to all 5 assessed reflection questions                                        | **Documented in `Reflection_Report_PART_2.md`** |
 
 ---
 
 ## 1. Repository Structure
+
 ```
 Assignment-1/
 ├── README.md                                 # Master repository documentation & quick start
@@ -82,12 +85,14 @@ Assignment-1/
 ## 2. Quick Start & Verification Instructions
 
 ### System Requirements
+
 - Node.js >= 18.0.0 (Node.js 20+ recommended)
 - Git
 
 Both applications use **zero external runtime dependencies** for test and harness execution, guaranteeing instant, 100% reliable execution in any environment without requiring `npm install` or active internet connectivity.
 
 ### Running Part 1A (Deterministic Harness)
+
 ```powershell
 cd Part-1A
 
@@ -99,6 +104,7 @@ node .harness/run-harness.js
 ```
 
 ### Running Part 1B (Non-Deterministic AI Evaluation Harness)
+
 ```powershell
 cd Part-1B
 
@@ -108,19 +114,22 @@ node --test tests/reviewer.test.js
 # 2. Run the 3-layer non-deterministic evaluation harness (16 cases)
 node .harness/evalRunner.js
 ```
-*(Optional: If you wish to test Part 1B against live cloud LLMs, set `$env:GEMINI_API_KEY="your-key"` or `$env:OPENAI_API_KEY="your-key"`; the harness will automatically route to the cloud API while maintaining the same 3-layer validation pipeline!)*
+
+_(Optional: If you wish to test Part 1B against live cloud LLMs, set `$env:GEMINI_API_KEY="your-key"` or `$env:OPENAI_API_KEY="your-key"`; the harness will automatically route to the cloud API while maintaining the same 3-layer validation pipeline!)_
 
 ---
 
 ## 3. Key Verification Results
 
 ### Part 1A Deterministic Harness Run
+
 - **Gate 1 (Syntax & Lint)**: PASS (0 violations across all files)
 - **Gate 2 (SAST Security Guard)**: PASS (0 vulnerabilities detected; TTL eviction verified)
 - **Gate 3 (Unit & Contract Tests)**: PASS (13/13 tests passing, duration ~520ms)
 - **Self-Healing Repair Cycle**: Detected missing `Retry-After` header and unbounded cache in `initial-generation/`, repaired root causes, and achieved 100% PASS on re-execution.
 
 ### Part 1B Non-Deterministic Evaluation Run
+
 - **Layer 1 (Structural Invariants)**: 100% Pass (16/16 cases conform to JSON schema contract)
 - **Layer 2 (Property & Invariant Boundaries)**: 100% Pass (16/16 cases satisfy line bounds and refusal rules)
 - **Layer 3 (Semantic & Quality Rubric)**: 96.9% Average Score (Target: $\ge 80\%$)
@@ -130,6 +139,7 @@ node .harness/evalRunner.js
 ---
 
 ## 4. Assessment Deliverables Checklist
+
 - [x] Part 1A and Part 1B fully implemented and verified.
 - [x] Full GitHub Spec Kit SDD artifacts present (`constitution.md`, `spec.md`, `clarifications.md`, `plan.md`, `tasks.md`).
 - [x] Part 1A deterministic harness (Lint, SAST, Unit/Contract) operational.
