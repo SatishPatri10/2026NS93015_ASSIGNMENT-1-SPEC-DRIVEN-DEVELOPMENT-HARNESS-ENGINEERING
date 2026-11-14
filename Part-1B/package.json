@@ -1,0 +1,14 @@
+{
+  "name": "semantic-code-reviewer",
+  "version": "1.0.0",
+  "description": "Non-Deterministic AI Semantic Code Review & Refactoring Assistant with 3-Layer Evaluation Harness",
+  "main": "src/reviewer.js",
+  "scripts": {
+    "start": "node src/reviewer.js",
+    "test": "node --test tests/*.test.js",
+    "eval": "node .harness/evalRunner.js",
+    "harness": "node .harness/evalRunner.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

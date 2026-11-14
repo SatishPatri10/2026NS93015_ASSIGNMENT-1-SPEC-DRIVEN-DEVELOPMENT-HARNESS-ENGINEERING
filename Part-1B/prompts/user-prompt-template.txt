@@ -1,0 +1,7 @@
+Please perform a semantic code review and refactoring analysis on the following code snippet:
+
+```{{language}}
+{{code}}
+```
+
+Return your findings strictly in the required JSON contract schema.
