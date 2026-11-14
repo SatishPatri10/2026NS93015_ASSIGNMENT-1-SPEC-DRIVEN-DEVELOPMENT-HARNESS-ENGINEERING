@@ -5,11 +5,11 @@
 
 ---
 
-**Student Name**: [Your Full Name Here]  
-**Student BITS ID**: [Your BITS Student ID Here]  
+**Student Name**: Satish Patri  
+**Student BITS ID**: 2026NS93015  
 **Course Name**: AI-Augmented Software Development Life Cycle (SEZG534)  
 **Semester**: Semester 1, 2026-2027  
-**Public GitHub Repository URL**: [https://github.com/your-username/ai-sdlc-assignment-1]  
+**Public GitHub Repository URL**: https://github.com/SatishPatri10/2026NS93015_ASSIGNMENT-1-SPEC-DRIVEN-DEVELOPMENT-HARNESS-ENGINEERING  
 **Demonstration Video Link (Google Drive / OneDrive)**: [https://drive.google.com/file/d/your-video-link-here/view?usp=sharing]  
 
 ---
