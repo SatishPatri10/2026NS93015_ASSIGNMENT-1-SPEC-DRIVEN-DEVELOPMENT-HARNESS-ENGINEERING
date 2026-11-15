@@ -21,7 +21,6 @@ This repository contains the complete implementation and verification artifacts 
 ```md
 Assignment-1/
 ├── README.md                                 # Master repository documentation & quick start
-├── Reflection_Report_PART_2.md               # LMS Submission Reflection Report (Assessed Part 2)
 │
 ├── Part-1A/                                  # Deterministic Application
 │   ├── .specify/                             # Spec Kit configuration, scripts, & constitution
