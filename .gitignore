@@ -27,4 +27,4 @@ npm-debug.log*
 !Part-1A/logs/*.log
 !Part-1B/logs/
 !Part-1B/logs/*.log
-*.ini
+desktop.ini
