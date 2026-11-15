@@ -156,5 +156,5 @@ _(Optional: If you wish to test Part 1B against live cloud LLMs, set `$env:GEMIN
 - [x] Part 1B non-deterministic harness (Layer 1 Schema, Layer 2 Invariants, Layer 3 Semantic) operational.
 - [x] 16 evaluation benchmark cases covering normal, boundary, ambiguous, missing mandatory, malformed, and adversarial inputs.
 - [x] Both parts include preserved initial generation, failure reports, final generation, and `harness-log.md`.
-- [x] Reflection Report answering all 5 assessed questions prepared in `Reflection_Report_PART_2.md`.
+- [x] Reflection Report answering all 5 assessed questions prepared in `"Ai ASDLC_Assignemnt1_2026ns93015.docx"`.
 - [x] Zero API keys or secrets committed to repository.
